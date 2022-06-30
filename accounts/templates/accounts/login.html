@@ -19,6 +19,13 @@
                 {% csrf_token %} {{ form.as_p }}
                 <button type="submit">Login</button>
             </form>
+            <div>
+                <a href="/employee/register/">
+                    <h3>Employee register</h3>
+                </a>
+                <h3><a href="/farmer/register/">Farmer register</a>
+                </h3>
+            </div>
         {% endif %}
         </div>
     </div>

@@ -24,7 +24,7 @@ def EmployeesRegisterViews(request):
         if form.is_valid():
             user = form.save()
             message = 'user created'
-            return redirect('login')
+            return redirect('/')
         else:
             message = 'form is not valid'
     else:
