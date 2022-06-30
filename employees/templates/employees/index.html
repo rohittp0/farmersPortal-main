@@ -1,13 +1,142 @@
-{% extends "employees/base.html" %} {% block content %}
-<div class="container">
-  <h1>
-    <strong>Employees</strong>
-    <br />
-    <button><a href="{% url 'index' %}">Home</a></button>
-    <br />
-    <button><a href="{% url 'employee_hiring_request_list' %}"
-      >employee_hiring_request_list</a></button>
-    
-  </h1>
-</div>
+{% extends "farmers/new_base.html" %}
+{% block styles %}
+    <style>
+        .base_container {
+            padding: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .item {
+            background-color: white;
+            border-radius: 1.5rem;
+            margin: 1.5rem;
+        }
+
+        .item_top {
+            width: 20rem;
+            height: 4rem;
+            border-radius: 1rem 1rem 0 0;
+            background-color: #FFFFFF;
+        }
+
+        .item_bottom {
+            width: 20rem;
+
+
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .item_bottom_text {
+            padding-top: .5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .item_top_text {
+            margin: 1.5rem;
+        }
+
+        .left-box {
+            width: 60%;
+
+            height: 100vh;
+        }
+
+        .right-box {
+            width: 40%;
+
+            height: 100vh;
+        }
+
+        .home_container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        .ann_container {
+            background-color: #F67979;
+            border: 10px #ACACAC;
+            width: 80%;
+            margin-top: 6rem;
+        }
+
+        .ann_item {
+            padding: 1rem;
+            background-color: #eae9e9;
+        }
+
+        .item_bottom_left {
+            width: 10rem;
+            height: 3rem;
+            background-color: #61D466;
+            border-radius: 0 0 0 1rem;
+
+
+        }
+
+        .item_bottom_right {
+            width: 10rem;
+            height: 3rem;
+            background-color: #FF3C3C;
+            border-radius: 0 0 1rem 0;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="home_container">
+        <div class="left-box">
+            <div class="base_container">
+                {% for req in reqs %}
+                    <div class="item">
+                        <div class="item_top">
+                            <div class="item_top_text">
+                                <p>You received a job offer
+                                    from {{ req.from_user.first_name }} {{ req.from_user.last_name }} </p>
+                            </div>
+                        </div>
+                        <div class="item_bottom">
+                            <form action="accept/" method="post">
+                                {% csrf_token %}
+                                <input type="text" value="{{ req.id }}" style="display:none;">
+                                <div class="item_bottom_left">
+                                    <button type="submit" class="item_bottom_text">Accept</button>
+                                </div>
+                            </form>
+                            <form method="post" action="reject/">
+                                {% csrf_token %}
+                                <input type="text" value="{{ req.id }}" style="display:none;">
+
+                                <div class="item_bottom_right">
+                                    <button type="submit" class="item_bottom_text">Decline</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <div class="bottom-card"></div>
+        </div>
+        <div class="right-box">
+            <div class="ann_container">
+                <div class="ann_head" style="padding: 1rem">
+                    Announcements
+                </div>
+                {% for an in anns %}
+                    <div class="ann_item">
+                        <h3>{{ an.title }}</h3>
+                        <p>{{ an.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 {% endblock content %}

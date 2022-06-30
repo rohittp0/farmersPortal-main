@@ -1,4 +1,3 @@
-
 from django.urls import path
 from . import views
 
@@ -7,9 +6,9 @@ urlpatterns = [
     path('register/', views.EmployeesRegisterViews, name='employee_registration'),
     path('hiring-request-list/', views.HiringRequestList,
          name='employee_hiring_request_list'),
-    path('accepted-hiring-request/<int:id>/',
-         views.AcceptedJob, name='accepted_hiring_request'),
-    path('rejected-hiring_request_list/<int:id>/',
-         views.RejectedJob, name='rejected_hiring_request'),
-
+    path('accept/',
+         views.accepted_job, name='accepted_hiring_request'),
+    path('reject/',
+         views.rejected_job, name='rejected_hiring_request'),
+    path("profile/", views.profile, name="profile")
 ]

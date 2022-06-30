@@ -36,7 +36,7 @@
             background-color: #F67979;
             border: 10px #ACACAC;
             width: 80%;
-            margin-top: 6rem;
+            margin-top: 10rem;
         }
 
         .ann_item {
@@ -44,23 +44,37 @@
             background-color: #eae9e9;
         }
 
+        .profile_container {
+            padding: 3rem;
+            background-color: white;
+            width: 50%;
+            margin-left: 6rem;
+            margin-top: 10rem;
+            display: flex;
+            justify-content: start;
+            border-radius: 3rem;
+        }
+
+        .details {
+            margin-left: 3rem;
+        }
+
     </style>
 {% endblock %}
 {% block content %}
     <div class="home_container">
         <div class="left-box">
-            <div class="cards">
-                <div class="row_1">
-                    <img class="card_img" width="190px" src="/media/market_rate.jpg">
-                    <img width="190px" src="/media/forum.jpg" class="card_img">
-
+            <div class="profile_container">
+                <div class="profile_img">
+                    <img width="150px" src="/media/pro.png">
                 </div>
-                <div class="row_2">
-                    <a href="{{ weather.url_of_weather }}"> <img width="190px" class="card_img"
-                                                                 src="/media/Weather.jpg"></a>
-
-                    <a href="hire/"><img width="190px" src="/media/Hire.jpg" class="card_img"></a>
+                <div class="details">
+                    <H2>{{ request.user.first_name }} {{ requst.user.last_name }}</H2>
+                    <p>Age: {{ request.user.age }}</p>
+                    <p>Aadhar: {{ request.user.aadhar }}</p>
+                    
                 </div>
+
             </div>
             <div class="bottom-card"></div>
         </div>

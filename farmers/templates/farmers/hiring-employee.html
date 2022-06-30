@@ -43,16 +43,24 @@
         }
     </style>
     <div class="base_container">
-        <div class="item">
-            <div class="item_top">
-                <div class="item_top_text">
-                    <p>Name:</p>
-                    <p>Name:</p>
-                    <p>Name:</p>
-                    <p>Name:</p>
-                </div>
+        {% for employee in employees %}
+            <div class="item">
+                <form action="" method="post">
+                    <div class="item_top">
+                        {% csrf_token %}
+                        <input style="display: none" type="text" name="employee" value="{{ employee.id }} ">
+                        <div class="item_top_text">
+                            <p>Name: {{ employee.first_name }} {{ employee.last_name }} </p>
+                            <p>Age: {{ employee.age }}</p>
+                            <p>Address: {{ employee.address }}</p>
+                        </div>
+
+                    </div>
+                    <div>
+                        <button type="submit" class="item_bottom">Hire</button>
+                    </div>
+                </form>
             </div>
-            <div class="item_bottom"><h3 class="item_bottom_text">Hire</h3></div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock content %}

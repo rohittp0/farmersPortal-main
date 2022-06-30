@@ -1,14 +1,19 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from accounts.models import User
+from admins.models import Announcements
 from employees.forms import EmployeesSignUpForm
 from employees.models import Hearing
 
 # Create your views here.
+from farmers.models import HiringRequest
 
 
 def index(request):
-    return render(request, 'employees/index.html')
+    anns = Announcements.objects.all()
+    print(anns)
+    reqs = HiringRequest.objects.filter(to_user=request.user).exclude(accepted=True)
+    return render(request, 'employees/index.html', {"anns": anns, "reqs": reqs})
 
 
 def EmployeesRegisterViews(request):
@@ -34,21 +39,30 @@ def HiringRequestList(request):
     return render(request, "employees/hiring-request-list.html", {'hiring_request_lists': hiring_request_lists})
 
 
-def RejectedJob(request, id):
-    hearing = Hearing.objects.get(pk=id)
-    hearing.jobHearingStatus = "rejected"
-    hearing.save()
-    user = User.objects.get(pk=request.user.id)
-    user.is_available_for_employment = True
-    user.save()
-    return redirect('employee_hiring_request_list')
+def rejected_job(request):
+    if request.method == "POST":
+        try:
+            hearing = HiringRequest.objects.get(pk=request.POST["id"])
+            hearing.rejected = True
+            hearing.save()
+        except Exception as e:
+            print(e)
+    return redirect('/employee/')
 
 
-def AcceptedJob(request, id):
-    hearing = Hearing.objects.get(pk=id)
-    hearing.jobHearingStatus = "accepted"
-    hearing.save()
-    user = User.objects.get(pk=request.user.id)
-    user.is_available_for_employment = False
-    user.save()
-    return redirect('employee_hiring_request_list')
+def accepted_job(request):
+    if request.method == "POST":
+        try:
+            hearing = HiringRequest.objects.get(pk=request.POST["id"])
+            hearing.accepted = True
+            hearing.save()
+        except Exception as e:
+            print(e)
+    return redirect('/employee/')
+
+
+@login_required()
+def profile(request):
+    anns = Announcements.objects.all()
+    print(anns)
+    return render(request, "employees/profile.html", {"anns": anns})

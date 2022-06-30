@@ -17,3 +17,10 @@ class FarmerCropDetails(models.Model):
 
     def __str__(self):
         return f"{self.crop_category}-{self.user.username}"
+
+
+class HiringRequest(models.Model):
+    from_user = models.ForeignKey(User, related_name="from_user", on_delete=models.CASCADE)
+    to_user = models.ForeignKey(User, related_name="to_user", on_delete=models.CASCADE)
+    accepted = models.BooleanField(blank=True, null=True)
+    rejected = models.BooleanField(blank=True, null=True)

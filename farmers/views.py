@@ -5,7 +5,7 @@ from accounts.views import logout
 from admins.models import Announcements, Crop, Weather
 from employees.models import Hearing
 from farmers.forms import FarmerDetailsForm, FarmerSignUpForm, HiringEmployeeForm
-from farmers.models import FarmerCropDetails
+from farmers.models import FarmerCropDetails, HiringRequest
 
 
 # Create your views here.
@@ -13,8 +13,11 @@ from farmers.models import FarmerCropDetails
 
 @login_required
 def index(request):
-    context = {"anns": Announcements.objects.all()}
-    return render(request, 'farmers/index.html')
+    context = {"anns": Announcements.objects.all(), }
+    if Weather.objects.all().exists():
+        context["weather"] = Weather.objects.all().last()
+        print(context)
+    return render(request, 'farmers/index.html', context)
 
 
 def FarmersRegisterViews(request):
@@ -152,6 +155,18 @@ def profile(request):
         context = {}
     return render(request, "farmers/profile.html", context=context)
 
+
 @login_required
 def employee_hire(request):
-    return render(request,"farmers/hiring-employee.html")
+    if request.method == "POST":
+        eid = request.POST["employee"]
+        try:
+            print(eid)
+            print()
+            user = User.objects.get(id=eid)
+            h, _ = HiringRequest.objects.get_or_create(from_user=request.user, to_user=user)
+            print(h)
+        except User.DoesNotExist:
+            pass
+    context = {"employees": User.objects.all()}
+    return render(request, "farmers/hiring-employee.html", context)
