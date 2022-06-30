@@ -1,57 +1,72 @@
-{% extends "employees/base.html" %} {% block content %}
+{% extends "accounts/new_index.html" %} {% block content %}
+
+    <style>
+        .container {
+            margin-left: 35%;
+            margin-top: 25%;
+            background-color: #c5821e;
+            width: 25%;
+            padding: 1rem;
+        }
+    </style>
+
+    <div class="container">
+        <strong>Registrations</strong>
+        {% if message %}
+            <div class="alert alert-success">{{ message }}</div>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>First Name</td>
+                    <td>{{ form.first_name }}</td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td>{{ form.last_name }}</td>
+                </tr>
+
+                <tr>
+                    <td>Username</td>
+                    <td>{{ form.username }}</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>{{ form.email }}</td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td>{{ form.password1 }}</td>
+                </tr>
+                <tr>
+                    <td>confirm Password</td>
+                    <td>{{ form.password2 }}</td>
+                </tr>
+
+                <tr>
+                    <td>Age</td>
+                    <td>{{ form.age }}</td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td>{{ form.phone }}</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>{{ form.address }}</td>
+                </tr>
+                <tr>
+                    <td>Aadhar</td>
+                    <td>{{ form.aadhar }}</td>
+                </tr>
+                <span class="text-error">{{ form.errors }}</span>
+            </table>
+
+            <button><input type="submit" value="Register"/></button>
+        </form>
+    </div>
 
 
-<body>
-  <div class="container">
-    <strong>employees</strong>
-    {% if message %}
-    <div class="alert alert-success">{{ message }}</div>
-    {% endif %}
-    <form method="post">
-      {% csrf_token %}
-      <div class="form-group first">
-        <label for="first_name">First Name</label>
-        {{ form.first_name }}
-      </div>
-      <div class="form-group first">
-        <label for="last_name">Last Name</label>
-        {{ form.last_name }}
-      </div>
-      <div class="form-group first">
-        <label for="username">Username</label>
-        {{ form.username }}
-      </div>
-      <div class="form-group first">
-        <label for="email">Email</label>
-        {{ form.email}}
-      </div>
-      <div class="form-group last mb-4">
-        <label for="password">Password</label>
-        {{ form.password1 }}
-      </div>
-      <div class="form-group last mb-4">
-        <label for="password">confirm Password</label>
-        {{ form.password2 }}
-      </div>
-      <div class="form-group last mb-4">
-        <label for="age">age</label>
-        {{ form.age }}
-      </div>
-      <div class="form-group last mb-4">
-        <label for="phone">phone</label>
-        {{ form.phone }}
-      </div>
-      <div class="form-group last mb-4">
-        <label for="address">address</label>
-        {{ form.address }}
-      </div>
-      <div class="form-group last mb-4">
-        <label for="aadhar">aadhar</label>
-        {{ form.aadhar }}
-      </div>
-      <span class="text-error">{{ form.errors }}</span>
-      <input type="submit" value="Register" />
-    </form>
-  </div>
-</body>
+
 {% endblock content %}
