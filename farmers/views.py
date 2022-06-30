@@ -151,3 +151,7 @@ def profile(request):
     except Exception as e:
         context = {}
     return render(request, "farmers/profile.html", context=context)
+
+@login_required
+def employee_hire(request):
+    return render(request,"farmers/hiring-employee.html")

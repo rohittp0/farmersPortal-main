@@ -1,17 +1,58 @@
-{% extends "farmers/base.html" %} {% block content %}
-<div class="container">
-  <h1>
-    <strong>hiring employee</strong>
-  </h1>
-  <div>
-    <form method="post">
-      {% csrf_token %} {% for field in form %}
-      <div class="fieldWrapper">
-        {{ field.errors }} {{ field.label_tag }} {{ field }}
-      </div>
-      {% endfor %}
-      <button type="submit" value="submit">hire user</button>
-    </form>
-  </div>
-</div>
+{% extends "farmers/new_base.html" %} {% block content %}
+    <style>
+        .base_container {
+            padding: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .item {
+
+            background-color: white;
+            border-radius: 1.5rem;
+            margin: 1.5rem;
+        }
+
+        .item_top {
+            width: 20rem;
+            height: 10rem;
+            border-radius: 1.5rem 1.5rem 0 0;
+            background-color: #FFFFFF;
+
+
+        }
+
+        .item_bottom {
+            width: 20rem;
+            height: 5rem;
+            border-radius: 0 0 1.5rem 1.5rem;
+            background-color: #99ACDD;
+            text-align: center;
+
+        }
+
+        .item_bottom_text {
+            padding-top: 2rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .item_top_text {
+            margin: 1.5rem;
+        }
+    </style>
+    <div class="base_container">
+        <div class="item">
+            <div class="item_top">
+                <div class="item_top_text">
+                    <p>Name:</p>
+                    <p>Name:</p>
+                    <p>Name:</p>
+                    <p>Name:</p>
+                </div>
+            </div>
+            <div class="item_bottom"><h3 class="item_bottom_text">Hire</h3></div>
+        </div>
+    </div>
 {% endblock content %}
