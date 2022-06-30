@@ -1,0 +1,26 @@
+{% extends "farmers/base.html" %} {% block content %}
+<div class="container_1">
+  <h1>
+    <strong>hiring_request_list</strong>
+  </h1>
+  <br />
+  <div>
+    {% for hearing in hiring_requests %}
+    <div>
+      <p>Employee Email {{hearing.email}}</p>
+      <p>Message for Employee {{hearing.message}}</p>
+      <p>Employee Status {{hearing.jobHearingStatus}}</p>
+      <form
+        action="{% url 'delete_hiring_request' hearing.id %}"
+        method="post"
+        class="d-inline"
+      >
+        {% csrf_token %}
+        <button type="submit" class="btn">Delete</button>
+      </form>
+    </div>
+    <hr />
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

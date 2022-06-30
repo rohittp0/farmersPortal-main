@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .head {
+            width: 100%;
+            height: 75px;
+            background-color: #B5EC8A;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+        }
+
+        .logo {
+            display: flex;
+            justify-content: space;
+        }
+    </style>
+    {% block styles %}
+    {% endblock styles %}
+</head>
+<body style="background:#B7FBFF">
+<header class="head">
+
+    <div class="logo">
+        <img width="60px" style="padding-top: 10px;" src="../../../media/farmers 1.png" alt="">
+        <div style="padding-top: 20px;font-size:2rem;padding-left: 10px;"><strong>Agro Farm</strong></div>
+    </div>
+
+    <div style="display: flex;justify-content: center">
+        <div class="profile"><img width="150px" src="/media/Profile.png" alt="">
+        </div>
+        <div class="logout"><a href="/logout/"><img width="200px" src="/media/logout.png" alt=""></a>
+        </div>
+    </div>
+</header>
+<div class="content">
+    {% block content %} {% endblock content %}
+</div>
+</body>
+</html>

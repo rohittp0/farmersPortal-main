@@ -1,0 +1,23 @@
+{% extends "accounts/base.html" %} {% block content %}
+<div class="container">
+  <h1>App Links</h1>
+  <br />
+  <div>
+    <a href="{% url 'api_index' %}">Api Home</a>
+    <br />
+    <a href="{% url 'api_users' %}">Get All Users</a>
+    <br />
+    <a href="{% url 'api_announcements' %}">Get All Announcements</a>
+    <br />
+    <a href="{% url 'api_weather' %}">Get All Weather</a>
+    <br />
+    <a href="{% url 'api_crops' %}">Get All Crops</a>
+    <br />
+    <a href="{% url 'api_hearing' %}">Get All Hearing</a>
+    <br />
+    <a href="{% url 'api_farmer_crop_details' %}"
+      >Get All farmer_crop_details</a
+    >
+  </div>
+</div>
+{% endblock content %}

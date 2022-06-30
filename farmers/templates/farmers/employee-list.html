@@ -1,0 +1,26 @@
+{% extends "farmers/base.html" %} {% block content %}
+<div class="container_1">
+  <h1>
+    <strong>Employee List</strong>
+  </h1>
+  <br />
+  <div>
+    {% for employee in employees %}
+    <div class="card">
+      Full Name :
+      <strong> {{employee.first_name}} {{employee.last_name}} </strong>
+      <p>UserId : {{employee.id}}</p>
+      <p>Email : {{employee.email}}</p>
+      <p>Age : {{employee.age}}</p>
+      <p>Phone : {{employee.phone}}</p>
+      <p>Address : {{employee.address}}</p>
+      <button type="submit">
+        <a href="{% url 'hiring_employee' employee.email %}"
+          >hire {{employee.first_name}} {{employee.last_name}}
+        </a>
+      </button>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

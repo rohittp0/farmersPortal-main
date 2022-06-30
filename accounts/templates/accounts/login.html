@@ -1,0 +1,25 @@
+{% extends "accounts/new_index.html" %} {% block content %}
+    <style>
+        .container {
+            margin-left: 35%;
+            margin-top: 25%;
+            background-color: #c5821e;
+            width: 25%;
+            padding: 1rem;
+        }
+    </style>
+    <div class="container">
+        <h1>Login </h1>
+        <br/>
+        <div>
+            {% if message %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endif %} {% if form %}
+            <form method="post">
+                {% csrf_token %} {{ form.as_p }}
+                <button type="submit">Login</button>
+            </form>
+        {% endif %}
+        </div>
+    </div>
+{% endblock content %}

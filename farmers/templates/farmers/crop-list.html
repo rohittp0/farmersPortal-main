@@ -1,0 +1,29 @@
+{% extends "farmers/base.html" %} {% block content %}
+<div class="container_1">
+  <h1>
+    <strong>Crop List</strong>
+  </h1>
+  <br />
+  <div>
+    <button type="submit">
+      <a href="{% url 'add_farmer_crop_details' %}">Add Crop Details </a>
+    </button>
+    {% for crop in crops %}
+    <div>
+      <h3><strong>{{crop.crop_category}}</strong></h3>
+      <p>{{crop.land_per_hectare}}</p>
+      <button type="submit">
+        <a href="{% url 'farmers_crop_update' crop.id %}"
+          >update details of {{crop.crop_category}}
+        </a>
+      </button>
+      <button type="submit">
+        <a href="{% url 'farmers_crop_delete' crop.id %}"
+          >Delete {{crop.crop_category}}
+        </a>
+      </button>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

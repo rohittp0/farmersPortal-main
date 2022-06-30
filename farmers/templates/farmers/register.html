@@ -1,0 +1,55 @@
+{% extends "farmers/base.html" %} {% block content %}
+<body>
+<div class="container">
+    <strong>Registrations</strong>
+    {% if message %}
+    <div class="alert alert-success">{{ message }}</div>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <div class="form-group first mb-4">
+        <label for="first_name">First Name</label>
+        {{ form.first_name }}
+      </div>
+      <div class="form-group first mb-4">
+        <label for="last_name">Last Name</label>
+        {{ form.last_name }}
+      </div>
+      <div class="form-group first mb-4">
+        <label for="username">Username</label>
+        {{ form.username }}
+      </div>
+      <div class="form-group first mb-4">
+        <label for="email">Email</label>
+        {{ form.email}}
+      </div>
+      <div class="form-group last mb-4">
+        <label for="password">Password</label>
+        {{ form.password1 }}
+      </div>
+      <div class="form-group last mb-4">
+        <label for="password">confirm Password</label>
+        {{ form.password2 }}
+      </div>
+      <div class="form-group last mb-4">
+        <label for="age">age</label>
+        {{ form.age }}
+      </div>
+      <div class="form-group last mb-4">
+        <label for="phone">phone</label>
+        {{ form.phone }}
+      </div>
+      <div class="form-group last mb-4">
+        <label for="address">address</label>
+        {{ form.address }}
+      </div>
+      <div class="form-group last mb-4">
+        <label for="aadhar">aadhar</label>
+        {{ form.aadhar }}
+      </div>
+      <span class="text-error">{{ form.errors }}</span>
+      <button><input type="submit" value="Register" /></button>
+    </form>
+  </div>
+</body>
+{% endblock content %}

@@ -1,0 +1,13 @@
+{% extends "employees/base.html" %} {% block content %}
+<div class="container">
+  <h1>
+    <strong>Employees</strong>
+    <br />
+    <button><a href="{% url 'index' %}">Home</a></button>
+    <br />
+    <button><a href="{% url 'employee_hiring_request_list' %}"
+      >employee_hiring_request_list</a></button>
+    
+  </h1>
+</div>
+{% endblock content %}
