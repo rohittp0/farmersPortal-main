@@ -11,7 +11,7 @@ from farmers.models import HiringRequest
 
 def index(request):
     anns = Announcements.objects.all()
-    print(anns)
+    # print(anns)
     reqs = HiringRequest.objects.filter(to_user=request.user).exclude(accepted=True)
     return render(request, 'employees/index.html', {"anns": anns, "reqs": reqs})
 
@@ -40,10 +40,12 @@ def HiringRequestList(request):
 
 
 def rejected_job(request):
+    print(request)
     if request.method == "POST":
         try:
             hearing = HiringRequest.objects.get(pk=request.POST["id"])
             hearing.rejected = True
+            print(hearing)
             hearing.save()
         except Exception as e:
             print(e)
@@ -51,9 +53,11 @@ def rejected_job(request):
 
 
 def accepted_job(request):
+    print(request)
     if request.method == "POST":
         try:
             hearing = HiringRequest.objects.get(pk=request.POST["id"])
+            print(hearing)
             hearing.accepted = True
             hearing.save()
         except Exception as e:
@@ -64,5 +68,5 @@ def accepted_job(request):
 @login_required()
 def profile(request):
     anns = Announcements.objects.all()
-    print(anns)
+    # print(anns)
     return render(request, "employees/profile.html", {"anns": anns})

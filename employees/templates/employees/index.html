@@ -78,14 +78,14 @@
             height: 3rem;
             background-color: #61D466;
             border-radius: 0 0 0 1rem;
-
-
+            border: 0;
         }
 
         .item_bottom_right {
             width: 10rem;
             height: 3rem;
             background-color: #FF3C3C;
+            border: 0;
             border-radius: 0 0 1rem 0;
         }
     </style>
@@ -105,17 +105,17 @@
                         <div class="item_bottom">
                             <form action="accept/" method="post">
                                 {% csrf_token %}
-                                <input type="text" value="{{ req.id }}" style="display:none;">
+                                <input name="id" type="text" value="{{ req.id }}" style="display:none;">
                                 <div class="item_bottom_left">
-                                    <button type="submit" class="item_bottom_text">Accept</button>
+                                    <button type="submit" class="item_bottom_left">Accept</button>
                                 </div>
                             </form>
                             <form method="post" action="reject/">
                                 {% csrf_token %}
-                                <input type="text" value="{{ req.id }}" style="display:none;">
+                                <input name="id" type="text" value="{{ req.id }}" style="display:none;">
 
                                 <div class="item_bottom_right">
-                                    <button type="submit" class="item_bottom_text">Decline</button>
+                                    <button type="submit" class="item_bottom_right">Decline</button>
                                 </div>
                             </form>
                         </div>
