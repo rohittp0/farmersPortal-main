@@ -68,6 +68,20 @@ class EmployeesSignUpForm(UserCreationForm):
             }
         )
     )
+    state = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        )
+    )
+    salary = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        )
+    )
     aadhar = forms.CharField(
         widget=forms.TextInput(
             attrs={
@@ -88,4 +102,4 @@ class EmployeesSignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2',
-                  'is_employee', 'age', 'phone', 'address', 'aadhar')
+                  'is_employee', 'age', 'phone', 'address', 'aadhar', "state", "salary")

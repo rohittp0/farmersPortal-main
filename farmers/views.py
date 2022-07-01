@@ -22,6 +22,7 @@ def index(request):
 
 def FarmersRegisterViews(request):
     form = FarmerSignUpForm(request.POST or None)
+    crops = Crop.objects.all()
     message = None
     if request.method == 'POST':
         form = FarmerSignUpForm(request.POST)
@@ -34,7 +35,7 @@ def FarmersRegisterViews(request):
     else:
         form = FarmerSignUpForm()
         print("in else")
-    connext = {"form": form, "message": message}
+    connext = {"form": form, "message": message, "crops": crops}
     return render(request, "farmers/register.html", connext)
 
 

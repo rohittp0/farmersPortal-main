@@ -78,6 +78,7 @@ class FarmerSignUpForm(UserCreationForm):
             }
         )
     )
+    hector = forms.FloatField()
     is_farmer = forms.BooleanField(
         disabled=True,
         initial=True,
@@ -91,7 +92,7 @@ class FarmerSignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2',
-                  'is_farmer', 'age', 'phone', 'address', 'aadhar')
+                  'is_farmer', 'age', 'phone', 'address', 'aadhar', "corps", "hector")
 
 
 class HiringEmployeeForm(forms.ModelForm):
@@ -114,6 +115,7 @@ class FarmerDetailsForm(forms.ModelForm):
     class Meta:
         model = FarmerCropDetails
         fields = ('crop_category', 'land_per_hectare')
+
     land_per_hectare = forms.IntegerField(
         widget=forms.TextInput(
             attrs={

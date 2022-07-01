@@ -56,9 +56,23 @@
                     <td>Address</td>
                     <td>{{ form.address }}</td>
                 </tr>
+
+                <td>Crops
+                </td>
+                <td>
+                    <select id="cars" name="cars">
+                        {% for crop in crops %}
+                            <option value="{{ crop.id }}">{{ crop.crop_name }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
                 <tr>
                     <td>Aadhar</td>
                     <td>{{ form.aadhar }}</td>
+                </tr>
+                <tr>
+                    <td>Hector</td>
+                    <td>{{ form.hector }}</td>
                 </tr>
                 <span class="text-error">{{ form.errors }}</span>
             </table>

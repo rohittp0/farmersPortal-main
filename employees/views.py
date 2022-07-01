@@ -31,7 +31,7 @@ def EmployeesRegisterViews(request):
         form = EmployeesSignUpForm()
         print("in else")
     connext = {"form": form, "message": message}
-    return render(request, "farmers/register.html", connext)
+    return render(request, "employees/register.html", connext)
 
 
 def HiringRequestList(request):

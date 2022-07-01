@@ -94,34 +94,39 @@
     <div class="home_container">
         <div class="left-box">
             <div class="base_container">
-                {% for req in reqs %}
-                    <div class="item">
-                        <div class="item_top">
-                            <div class="item_top_text">
-                                <p>You received a job offer
-                                    from {{ req.from_user.first_name }} {{ req.from_user.last_name }} </p>
+                {% if reqs %}
+                    {% for req in reqs %}
+                        <div class="item">
+                            <div class="item_top">
+                                <div class="item_top_text">
+                                    <p>You received a job offer
+                                        from {{ req.from_user.first_name }} {{ req.from_user.last_name }} </p>
+                                </div>
+                            </div>
+                            <div class="item_bottom">
+                                <form action="accept/" method="post">
+                                    {% csrf_token %}
+                                    <input name="id" type="text" value="{{ req.id }}" style="display:none;">
+                                    <div class="item_bottom_left">
+                                        <button type="submit" class="item_bottom_left">Accept</button>
+                                    </div>
+                                </form>
+                                <form method="post" action="reject/">
+                                    {% csrf_token %}
+                                    <input name="id" type="text" value="{{ req.id }}" style="display:none;">
+
+                                    <div class="item_bottom_right">
+                                        <button type="submit" class="item_bottom_right">Decline</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="item_bottom">
-                            <form action="accept/" method="post">
-                                {% csrf_token %}
-                                <input name="id" type="text" value="{{ req.id }}" style="display:none;">
-                                <div class="item_bottom_left">
-                                    <button type="submit" class="item_bottom_left">Accept</button>
-                                </div>
-                            </form>
-                            <form method="post" action="reject/">
-                                {% csrf_token %}
-                                <input name="id" type="text" value="{{ req.id }}" style="display:none;">
-
-                                <div class="item_bottom_right">
-                                    <button type="submit" class="item_bottom_right">Decline</button>
-                                </div>
-                            </form>
-                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div>
+                        <h2> No requests</h2>
                     </div>
-                {% endfor %}
-
+                {% endif %}
             </div>
             <div class="bottom-card"></div>
         </div>

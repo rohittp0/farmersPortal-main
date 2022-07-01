@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from admins.models import Crop
+
 
 class User(AbstractUser):
     is_admin = models.BooleanField('Is admin', default=False)
@@ -15,6 +17,10 @@ class User(AbstractUser):
                               max_length=12, blank=True)
     is_available_for_job = models.BooleanField(
         'Available for job', default=True)
+    state = models.CharField(max_length=50, null=True, blank=True)
+    salary = models.CharField(max_length=50, null=True, blank=True)
+    corps = models.ForeignKey(Crop, related_name="user", on_delete=models.SET_NULL, blank=True, null=True)
+    hector = models.FloatField(default=0)
 
     def __str__(self):
         return self.email
