@@ -172,5 +172,5 @@ def employee_hire(request):
             print(h)
         except User.DoesNotExist:
             pass
-    context = {"employees": User.objects.all()}
+    context = {"employees": User.objects.filter(is_employee=True, is_available_for_job=True)}
     return render(request, "farmers/hiring-employee.html", context)
