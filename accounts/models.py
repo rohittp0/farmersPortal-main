@@ -24,6 +24,9 @@ class User(AbstractUser):
 
     @property
     def net_worth(self):
+        if not self.corps:
+            return 0
+
         return self.hector * self.corps.yield_per_hector * self.corps.crop_price
 
     def __str__(self):
