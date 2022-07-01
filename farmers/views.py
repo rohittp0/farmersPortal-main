@@ -162,10 +162,12 @@ def profile(request):
     except Exception as e:
         context = {}
     try:
+        print(request.user.corps.crop_name)
         context['net_worth'] = request.user.hector * request.user.corps.yield_per_hector * request.user.corps.crop_price
     except Exception as e:
         print(e)
     context["anns"] = Announcements.objects.all()
+
     return render(request, "farmers/profile.html", context=context)
 
 
