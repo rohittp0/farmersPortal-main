@@ -28,8 +28,11 @@ def FarmersRegisterViews(request):
         form = FarmerSignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
+            crop = request.POST['cars']
+            user.corps = Crop.objects.get(id=crop)
+            user.save()
             message = 'user created'
-            return redirect('login')
+            return redirect('')
         else:
             message = 'form is not valid'
     else:
