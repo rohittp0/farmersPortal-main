@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from accounts.models import User
 from accounts.views import logout
-from admins.models import Announcements, Crop, Weather
+from admins.models import Announcements, Crop, Weather, Homepage
 from employees.models import Hearing
 from farmers.forms import FarmerDetailsForm, FarmerSignUpForm, HiringEmployeeForm
 from farmers.models import FarmerCropDetails, HiringRequest
@@ -14,6 +14,10 @@ from farmers.models import FarmerCropDetails, HiringRequest
 @login_required
 def index(request):
     context = {"anns": Announcements.objects.all(), }
+    if Homepage.objects.all().exists():
+        context["market_rate"] = Homepage.objects.last().market_rate_link
+        context["forum"] = Homepage.objects.last().forum_link
+
     if Weather.objects.all().exists():
         context["weather"] = Weather.objects.all().last()
         print(context)
