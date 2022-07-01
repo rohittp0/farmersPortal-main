@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 
@@ -8,6 +9,7 @@ class Announcements(models.Model):
     description = models.TextField("Announcement description")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    link = models.CharField(max_length=1000, default='')
 
     def __str__(self):
         return self.title

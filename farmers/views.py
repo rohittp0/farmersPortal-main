@@ -157,6 +157,7 @@ def profile(request):
         context = {"corps": corps}
     except Exception as e:
         context = {}
+    context["anns"] = Announcements.objects.all()
     return render(request, "farmers/profile.html", context=context)
 
 
@@ -166,7 +167,6 @@ def employee_hire(request):
         eid = request.POST["employee"]
         try:
             print(eid)
-            print()
             user = User.objects.get(id=eid)
             h, _ = HiringRequest.objects.get_or_create(from_user=request.user, to_user=user)
             print(h)

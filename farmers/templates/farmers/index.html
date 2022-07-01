@@ -43,7 +43,8 @@
             padding: 1rem;
             background-color: #eae9e9;
         }
-        .bottom-card{
+
+        .bottom-card {
             background-color: #ffffff;
             padding: 1rem 5rem;
             margin-left: 2rem;
@@ -80,6 +81,9 @@
                     <div class="ann_item">
                         <h3>{{ an.title }}</h3>
                         <p>{{ an.description }}</p>
+                        {% if an.link %}
+                            <a href="{{ an.link }}">Click here</a>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
