@@ -60,6 +60,8 @@ def accepted_job(request):
             print(hearing)
             hearing.accepted = True
             hearing.save()
+            request.user.is_available_for_job = False
+            request.user.save()
         except Exception as e:
             print(e)
     return redirect('/employee/')
