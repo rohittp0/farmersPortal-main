@@ -46,13 +46,18 @@
 
         .profile_container {
             padding: 3rem;
-            background-color: white;
+
             width: 50%;
             margin-left: 6rem;
             margin-top: 10rem;
             display: flex;
             justify-content: start;
+
+        }
+        .profile{
+            background-color: white;
             border-radius: 3rem;
+            margin: 5rem;
         }
 
         .details {
@@ -64,26 +69,31 @@
 {% block content %}
     <div class="home_container">
         <div class="left-box">
-            <div class="profile_container">
-                <div class="profile_img">
-                    <img width="150px" src="/media/pro.png">
-                </div>
-                <div class="details">
-                    <H2>{{ request.user.first_name }} {{ requst.user.last_name }}</H2>
-                    <p>Age: {{ request.user.age }}</p>
-                    <p>Aadhar: {{ request.user.aadhar }}</p>
-                    <p>Current Crop: {{ request.user.crops.crop_name }}</p>
-                    <p>Land area : {{ request.user.hector }} hectors</p>
-                    {% if corps %}
-                        <p>Corps details :</p>
-                        <p>{{ corps.crop_category }}</p>
-                        <p>Available for job : {{ corps.is_available_for_job }}</p>
-                    {% endif %}
+            <div class="profile">
+                <div class="profile_container">
+                    <div class="profile_img">
+                        <img width="150px" src="/media/pro.png">
+                    </div>
+                    <div class="details">
+                        <H2>{{ request.user.first_name }} {{ requst.user.last_name }}</H2>
+                        <p>Age: {{ request.user.age }}</p>
+                        <p>Aadhar: {{ request.user.aadhar }}</p>
+                        <p>Current Crop: {{ request.user.crops.crop_name }}</p>
+                        <p>Land area : {{ request.user.hector }} hectors</p>
+                        {% if corps %}
+                            <p>Corps details :</p>
+                            <p>{{ corps.crop_category }}</p>
+                            <p>Available for job : {{ corps.is_available_for_job }}</p>
+                        {% endif %}
+
+                    </div>
 
                 </div>
-                <p><strong> Networth based on crops is {{ net_worth }} ruppes: </strong></p>
+                <h2 style="text-align: center;padding-bottom: 2rem"><strong> Networth based on crops is {{ net_worth }} ruppes: </strong></h2>
+
 
             </div>
+
             <div class="bottom-card"></div>
         </div>
         <div class="right-box">
