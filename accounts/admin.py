@@ -2,7 +2,9 @@ from django.contrib import admin
 
 from accounts.models import User
 
-admin.site.register(User)
 
+@admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display = [""]
+    search_fields = ["username", "first_name"]
+    list_display = ["first_name", 'last_name', ]
+    list_filter = ['is_admin', "is_farmer", "is_employee"]
