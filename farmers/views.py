@@ -36,7 +36,7 @@ def FarmersRegisterViews(request):
             user.corps = Crop.objects.get(id=crop)
             user.save()
             message = 'user created'
-            return redirect('')
+            return redirect('/')
         else:
             message = 'form is not valid'
     else:
