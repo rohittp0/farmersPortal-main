@@ -78,6 +78,15 @@ class FarmerSignUpForm(UserCreationForm):
             }
         )
     )
+
+    state = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control"
+            }
+        )
+    )
+
     hector = forms.FloatField()
     is_farmer = forms.BooleanField(
         disabled=True,
