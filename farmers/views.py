@@ -162,7 +162,7 @@ def profile(request):
     except Exception as e:
         context = {}
     try:
-        context['net_worth'] = request.user.hector * request.user.corps.yield_per_hector * request.corps.crop_price
+        context['net_worth'] = request.user.hector * request.user.corps.yield_per_hector * request.user.corps.crop_price
     except Exception as e:
         print(e)
     context["anns"] = Announcements.objects.all()
