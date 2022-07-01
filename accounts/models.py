@@ -22,5 +22,9 @@ class User(AbstractUser):
     corps = models.ForeignKey(Crop, related_name="user", on_delete=models.SET_NULL, blank=True, null=True)
     hector = models.FloatField(default=0)
 
+    @property
+    def net_worth(self):
+        return self.hector * self.corps.yield_per_hector * self.corps.crop_price
+
     def __str__(self):
         return self.email
