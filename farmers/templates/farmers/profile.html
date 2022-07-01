@@ -74,6 +74,7 @@
                     <p>Aadhar: {{ request.user.aadhar }}</p>
                     <p>Current Crop: {{ request.user.crops.crop_name }}</p>
                     <p>Land area : {{ request.user.hector }} hectors</p>
+                    <p> Networth based on crops is {{ net_worth }} ruppes: </p>
                     {% if corps %}
                         <p>Corps details :</p>
                         <p>{{ corps.crop_category }}</p>
