@@ -25,7 +25,7 @@ def logout(request):
 def get_succes_link(user):
     if user.is_farmer:
         return "/farmers/"
-    elif user.is_admin:
+    elif user.is_superuser:
         return "/admin/"
     elif user.is_employee:
         return "/employee/"
