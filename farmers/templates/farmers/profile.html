@@ -72,6 +72,8 @@
                     <H2>{{ request.user.first_name }} {{ requst.user.last_name }}</H2>
                     <p>Age: {{ request.user.age }}</p>
                     <p>Aadhar: {{ request.user.aadhar }}</p>
+                    <p>Current Crop: {{ request.user.crops.crop_name }}</p>
+                    <p>Land area : {{ request.user.hector }} hectors</p>
                     {% if corps %}
                         <p>Corps details :</p>
                         <p>{{ corps.crop_category }}</p>
