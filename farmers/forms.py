@@ -101,7 +101,7 @@ class FarmerSignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2',
-                  'is_farmer', 'age', 'phone', 'address', 'aadhar', "corps", "hector")
+                  'is_farmer', 'age', 'phone', 'address', 'aadhar', 'state', "corps", "hector")
 
 
 class HiringEmployeeForm(forms.ModelForm):
