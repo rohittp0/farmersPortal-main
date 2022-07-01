@@ -29,6 +29,7 @@ class Crop(models.Model):
     crop_description = models.TextField("Description of crop", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    yield_per_hector=models.FloatField(default=0)
 
     def __str__(self):
         return self.crop_name
