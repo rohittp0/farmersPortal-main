@@ -6,13 +6,14 @@ from employees.forms import EmployeesSignUpForm
 from employees.models import Hearing
 
 # Create your views here.
-from farmers.models import HiringRequest
+from farmers.models import HiringRequest, Job
 
 
+@login_required
 def index(request):
     anns = Announcements.objects.all()
     # print(anns)
-    reqs = HiringRequest.objects.filter(to_user=request.user).exclude(accepted=True)
+    reqs = Job.objects.all().exclude(applications__in=[request.user])
     return render(request, 'employees/index.html', {"anns": anns, "reqs": reqs})
 
 
@@ -43,10 +44,10 @@ def rejected_job(request):
     print(request)
     if request.method == "POST":
         try:
-            hearing = HiringRequest.objects.get(pk=request.POST["id"])
-            hearing.rejected = True
-            print(hearing)
-            hearing.save()
+
+            job = Job.objects.get(pk=request.POST["id"])
+
+            job.applications.remove(request.user)
         except Exception as e:
             print(e)
     return redirect('/employee/')
@@ -56,12 +57,8 @@ def accepted_job(request):
     print(request)
     if request.method == "POST":
         try:
-            hearing = HiringRequest.objects.get(pk=request.POST["id"])
-            print(hearing)
-            hearing.accepted = True
-            hearing.save()
-            request.user.is_available_for_job = False
-            request.user.save()
+            job = Job.objects.get(pk=request.POST["id"])
+            job.applications.add(request.user)
         except Exception as e:
             print(e)
     return redirect('/employee/')

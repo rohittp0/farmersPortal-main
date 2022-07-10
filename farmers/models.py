@@ -24,3 +24,13 @@ class HiringRequest(models.Model):
     to_user = models.ForeignKey(User, related_name="to_user", on_delete=models.CASCADE)
     accepted = models.BooleanField(blank=True, null=True)
     rejected = models.BooleanField(blank=True, null=True)
+
+
+class Job(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='job')
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=100)
+    day = models.IntegerField(default=10)
+    salary = models.FloatField(default=1000, help_text="per day")
+    applications = models.ManyToManyField(User, related_name="applicants")
+    hired_list = models.ManyToManyField(User, related_name="hired")

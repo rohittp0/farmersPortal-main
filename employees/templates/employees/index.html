@@ -16,7 +16,6 @@
 
         .item_top {
             width: 20rem;
-            height: 4rem;
             border-radius: 1rem 1rem 0 0;
             background-color: #FFFFFF;
         }
@@ -99,8 +98,15 @@
                         <div class="item">
                             <div class="item_top">
                                 <div class="item_top_text">
-                                    <p>You received a job offer
-                                        from {{ req.from_user.first_name }} {{ req.from_user.last_name }} </p>
+                                    <h2>
+                                        Job: {{ req.name }}
+                                    </h2>
+                                    <p>
+                                        About:{{ req.description }}
+                                    </p>
+                                    <p>
+                                        Salary: {{ req.salary }} &nbsp; &nbsp; Days:{{ req.day }}
+                                    </p>
                                 </div>
                             </div>
                             <div class="item_bottom">
@@ -108,7 +114,7 @@
                                     {% csrf_token %}
                                     <input name="id" type="text" value="{{ req.id }}" style="display:none;">
                                     <div class="item_bottom_left">
-                                        <button type="submit" class="item_bottom_left">Accept</button>
+                                        <button type="submit" class="item_bottom_left">Apply</button>
                                     </div>
                                 </form>
                                 <form method="post" action="reject/">
@@ -139,7 +145,7 @@
                     <div class="ann_item">
                         <h3>{{ an.title }}</h3>
                         <p>{{ an.description }}</p>
-                    {% if an.link %}
+                        {% if an.link %}
                             <a href="{{ an.link }}">Click here</a>
                         {% endif %}
                     </div>

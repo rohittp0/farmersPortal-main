@@ -1,10 +1,32 @@
 {% extends "farmers/new_base.html" %} {% block content %}
     <style>
         .base_container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .left-box {
+            width: 50%;
+            height: 100%;
+            text-align: center;
+            padding-top: 2rem;
+
+
+        }
+
+        .container_box {
             padding: 3rem;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+        }
+
+        .right-box {
+            width: 50%;
+
+            height: 100%;
+            padding-top: 2rem;
+
         }
 
         .item {
@@ -29,6 +51,7 @@
             border-radius: 0 0 1.5rem 1.5rem;
             background-color: #99ACDD;
             text-align: center;
+            font-size: 2rem;
 
         }
 
@@ -43,27 +66,68 @@
         }
     </style>
     <div class="base_container">
-        {% for employee in employees %}
-            <div class="item">
-                <form action="" method="post">
-                    <div class="item_top">
-                        {% csrf_token %}
-                        <input style="display: none" type="text" name="employee" value="{{ employee.id }} ">
-                        <div class="item_top_text">
-                            <p>Name: {{ employee.first_name }} {{ employee.last_name }} </p>
-                            <p>Age: {{ employee.age }}</p>
-                            <p>Address: {{ employee.address }}</p>
-                            <p>state: {{ employee.state }}</p>
+        <div class="left-box">
+            <h2>Applications</h2>
+            <div class="container_box">
+                {% for employee in employees %}
+                    <div class="item">
+                        <form action="" method="post">
+                            <div class="item_top">
+                                {% csrf_token %}
+                                <input style="display: none" type="text" name="employee" value="{{ employee.id }} ">
+                                <input style="display: none" type="text" name="type" value="hire">
 
-                            <p>Salary: {{ employee.salary }}</p>
-                        </div>
+                                <div class="item_top_text">
+                                    <p>Name: {{ employee.first_name }} {{ employee.last_name }} </p>
+                                    <p>Age: {{ employee.age }}</p>
+                                    <p>Address: {{ employee.address }}</p>
+                                    <p>state: {{ employee.state }}</p>
 
+                                    <p>Salary: {{ employee.salary }}</p>
+                                </div>
+
+                            </div>
+                            <div>
+                                <button type="submit" class="item_bottom">Hire</button>
+                            </div>
+                        </form>
                     </div>
-                    <div>
-                        <button type="submit" class="item_bottom">Hire</button>
-                    </div>
-                </form>
+
+                {% endfor %}
             </div>
-        {% endfor %}
+
+        </div>
+        <div class="right-box">
+            <h2 style="text-align: center">Hired employees</h2>
+            <div class="container_box">
+                {% for employee in hired %}
+                    <div class="item">
+                        <form action="" method="post">
+                            <div class="item_top">
+                                {% csrf_token %}
+                                <input style="display: none" type="text" name="employee" value="{{ employee.id }} ">
+                                <input style="display: none" type="text" name="type" value="cancel">
+
+                                <div class="item_top_text">
+                                    <p>Name: {{ employee.first_name }} {{ employee.last_name }} </p>
+                                    <p>Age: {{ employee.age }}</p>
+                                    <p>Address: {{ employee.address }}</p>
+                                    <p>state: {{ employee.state }}</p>
+
+                                    <p>Salary: {{ employee.salary }}</p>
+                                    <p>Contact Number: {{ employee.phone }}</p>
+                                </div>
+
+                            </div>
+                            <div>
+                                <button type="submit" class="item_bottom" style="background-color: #FF3C3C;color: white" >Remove</button>
+
+                            </div>
+                        </form>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock content %}

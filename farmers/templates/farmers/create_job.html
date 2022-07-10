@@ -3,8 +3,9 @@
     <style>
         .left-box {
             width: 60%;
-
             height: 100vh;
+            text-align: center;
+
         }
 
         .right-box {
@@ -68,45 +69,78 @@
             text-decoration: none;
         }
 
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 0.25rem;
+        }
+
+        input {
+            padding: 1rem;
+            border: 2px solid black;
+            border-radius: 0.5rem;
+            font-size: 1.25rem;
+            background-color: white;
+            margin: 0.5rem 0;
+            width: 100%;
+        }
+
+        #submit {
+            padding: 1rem 0.5rem;
+            border: none;
+            background-color: rgb(64, 203, 207);
+            cursor: pointer;
+        }
+
+        #submit:hover {
+            background-color: black;
+            color: white;
+        }
+
+        form {
+            margin: 4rem;
+        }
+
+
     </style>
 {% endblock %}
 {% block content %}
     <div class="home_container">
         <div class="left-box">
-            <div class="cards">
-                <div class="row_1">
-                    <a href="{{ market_rate }}"> <img class="card_img" width="190px" src="/media/market_rate.jpg">
-                    </a>
-                    <a href="{{ market_rate }}">
-                        <img width="190px" src="/media/forum.jpg" class="card_img">
-                    </a>
 
-                </div>
-                <div class="row_2">
-                    <a href="{{ weather.url_of_weather }}"> <img width="190px" class="card_img"
-                                                                 src="/media/Weather.jpg"></a>
+            <form action="" method="post">
+                <h1>Post a Job️</h1> <br>
+                {% if msg %}
+                    <div class="alert alert-success">{{ msg }}</div>
+                {% endif %}
 
-                    <a href="create/"><img width="190px" src="/media/Hire.jpg" class="card_img"></a>
-                </div>
+                {% if err %}
 
-            </div>
-            <div class="bottom-card">
-                <div class="create/"><a href="create"><h2> POST A JOB </h2></a></div>
+                    <div class="alert alert-danger">{{ err }} </div>
+                {% endif %}
+                {% csrf_token %}
+                <input type="text" name="jobname" placeholder="Input Job Title" required><br>
+                <input type="text" name="jdesc" placeholder="Input Job Description" required><br>
+                <input type="number" name="day" placeholder="Input number of days" required><br>
+                <input type="number" name="salary" placeholder="Input salary" required><br>
+                <input type="submit" value="Submit" id="submit">
+            </form>
 
-            </div>
         </div>
         <div class="right-box">
             <div class="ann_container">
                 <div class="ann_head" style="padding: 1rem">
-                    Announcements
+                    Added Jobs
                 </div>
                 {% for an in anns %}
                     <div class="ann_item">
-                        <h3>{{ an.title }}</h3>
+                        <h3>{{ an.name }}</h3>
                         <p>{{ an.description }}</p>
-                        {% if an.link %}
-                            <a href="{{ an.link }}">Click here</a>
-                        {% endif %}
+                        Salary:<p>{{ an.salary }} ,
+                        Days: {{ an.day }}
+
+                        <a href="/farmers/job/{{ an.id }}">Click here</a></p>
+
                     </div>
                 {% endfor %}
             </div>

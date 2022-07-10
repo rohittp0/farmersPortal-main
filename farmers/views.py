@@ -1,11 +1,11 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_list_or_404
 from django.contrib.auth.decorators import login_required
 from accounts.models import User
 from accounts.views import logout
 from admins.models import Announcements, Crop, Weather, Homepage
 from employees.models import Hearing
 from farmers.forms import FarmerDetailsForm, FarmerSignUpForm, HiringEmployeeForm
-from farmers.models import FarmerCropDetails, HiringRequest
+from farmers.models import FarmerCropDetails, HiringRequest, Job
 
 
 # Create your views here.
@@ -22,6 +22,24 @@ def index(request):
         context["weather"] = Weather.objects.all().last()
         print(context)
     return render(request, 'farmers/index.html', context)
+
+
+@login_required
+def create(request):
+    context = {"anns": Job.objects.filter(user=request.user), }
+    if request.method == "POST":
+        j_name = request.POST['jobname']
+        j_desc = request.POST['jdesc']
+        j_salary = request.POST["salary"]
+        j_day = request.POST['day']
+        print(j_day, j_desc, j_name, j_salary)
+        if j_name and j_desc and j_salary and j_day:
+            job = Job.objects.create(user=request.user, name=j_name, salary=j_salary, description=j_desc, day=j_day)
+            context["msg"] = "Job created successfully"
+        else:
+            context['err'] = "please enter all details"
+
+    return render(request, 'farmers/create_job.html', context)
 
 
 def FarmersRegisterViews(request):
@@ -126,16 +144,13 @@ def FarmerCropDetailsPage(request, id=0):
 
 
 @login_required
-def HiringRequestList(request):
+def HiringRequestList(request, id):
     if not request.user.is_farmer:
         logout(request)
         return redirect("login")
-    hiring_requests = Hearing.objects.filter(
-        email_hearing_by=request.user.email)
-    if len(hiring_requests) == 0:
-        return redirect('employee_list')
-    else:
-        return render(request, "farmers/hiring-request-list.html", {'hiring_requests': hiring_requests})
+    hiring_requests = Job.objects.get(id=id).applications.all()
+
+    return render(request, "farmers/hiring-request-list.html", {'hiring_requests': hiring_requests})
 
 
 @login_required
@@ -172,15 +187,20 @@ def profile(request):
 
 
 @login_required
-def employee_hire(request):
+def employee_hire(request, id):
+    job = Job.objects.get(id=id)
     if request.method == "POST":
         eid = request.POST["employee"]
+        e_type = request.POST["type"]
+        user = User.objects.get(id=eid)
         try:
-            print(eid)
-            user = User.objects.get(id=eid)
-            h, _ = HiringRequest.objects.get_or_create(from_user=request.user, to_user=user)
-            print(h)
-        except User.DoesNotExist:
+            if e_type == "hire":
+                job.hired_list.add(user)
+                job.applications.remove(user)
+            else:
+                job.hired_list.remove(user)
+        except Exception as e:
             pass
-    context = {"employees": User.objects.filter(is_employee=True, is_available_for_job=True)}
+
+    context = {"employees": job.applications.all(), "hired": job.hired_list.all()}
     return render(request, "farmers/hiring-employee.html", context)
