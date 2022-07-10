@@ -35,3 +35,14 @@ class Job(models.Model):
     applications = models.ManyToManyField(User, related_name="applicants")
     hired_list = models.ManyToManyField(User, related_name="hired")
     declined = models.ManyToManyField(User, related_name="rejected")
+
+    def __str__(self):
+        return f"{self.name}: {self.user.first_name} {self.user.last_name} "
+
+    @property
+    def total_count(self):
+        return self.applications.all().count()
+
+    @property
+    def hired_count(self):
+        return self.hired_list.all().count()

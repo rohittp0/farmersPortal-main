@@ -1,8 +1,93 @@
-{% extends "admins/base.html" %} {% block content %}
-<div class="container">
-  <h1>
-    <strong>admins</strong>
-    <a href="{% url 'index' %}">Home</a>
-  </h1>
-</div>
+{% extends "admins/base.html" %}
+{% block content %}
+    <style>
+        th, td {
+            padding: 8px 10px;
+            background-color: #67707a;
+            color: white;
+            font-weight: 600;
+        }
+
+        .head {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        td + td {
+            text-align: center;
+        }
+    </style>
+    <div class="container font-sans mx-auto px-4 sm:px-8">
+
+        <div class="">
+            <div class="head">
+                <div>
+                    <h3 class="">Details</h3>
+
+                </div>
+                <button type="button" class="btn btn-light float-r" onclick="print()">Print</button>
+            </div>
+            <table>
+                <tr>
+                    <th>details</th>
+                    <th> count</th>
+
+                </tr>
+                <tr>
+                    <td>Total Job Openings</td>
+                    <td>{{ job_count }}</td>
+                </tr>
+                <tr>
+                    <td>Employee count</td>
+                    <td>{{ employees }}</td>
+                </tr>
+            </table>
+            <br/><br/>
+            <table>
+                <tr>
+                    <th>Sl no</th>
+                    <th>Job name</th>
+                    <th>Salary</th>
+                    <th>Days</th>
+                    <th>Total Applications</th>
+                    <th>Hired Count</th>
+
+                </tr>
+
+                {% for job in jobs %}
+                    <tr>
+                        <td>
+                            {{ forloop.counter }}
+                        </td>
+
+
+                        <td>
+                            {{ job.name }}
+                        </td>
+                        <td>
+                            {{ job.salary }} Rs
+                        </td>
+                        <td>
+                            {{ job.day }} days
+                        </td>
+                        <td>
+                            {{ job.total_count }}
+                        </td>
+                        <td>
+                            {{ job.hired_count }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+    </div>
+    <script>
+    function print() {
+        const printer = window.open("", "_blank");
+
+        printer.document.write(document.getElementById("printable").innerHTML);
+        printer.print();
+    }
 {% endblock content %}
