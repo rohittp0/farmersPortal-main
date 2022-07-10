@@ -35,6 +35,8 @@ class Job(models.Model):
     applications = models.ManyToManyField(User, related_name="applicants")
     hired_list = models.ManyToManyField(User, related_name="hired")
     declined = models.ManyToManyField(User, related_name="rejected")
+    start_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.name}: {self.user.first_name} {self.user.last_name} "

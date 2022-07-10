@@ -32,9 +32,12 @@ def create(request):
         j_desc = request.POST['jdesc']
         j_salary = request.POST["salary"]
         j_day = request.POST['day']
+        start_date = request.POST['start_date']
+        end_date = request.POST["end_date"]
         print(j_day, j_desc, j_name, j_salary)
         if j_name and j_desc and j_salary and j_day:
-            job = Job.objects.create(user=request.user, name=j_name, salary=j_salary, description=j_desc, day=j_day)
+            job = Job.objects.create(user=request.user, name=j_name, salary=j_salary, description=j_desc, day=j_day,
+                                     start_date=start_date, end_date=end_date)
             context["msg"] = "Job created successfully"
         else:
             context['err'] = "please enter all details"
