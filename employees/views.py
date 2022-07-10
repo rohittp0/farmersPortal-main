@@ -24,11 +24,12 @@ def EmployeesRegisterViews(request):
     if request.method == 'POST':
         form = EmployeesSignUpForm(request.POST)
         if form.is_valid():
-            if not User.objects.filter(username=form.username).exists():
+            try:
                 user = form.save()
                 message = 'user created'
                 return redirect('/')
-            message = "username already exists"
+            except:
+                message = "username already exists"
         else:
             message = 'form is not valid'
     else:
@@ -50,7 +51,7 @@ def rejected_job(request):
 
             job = Job.objects.get(pk=request.POST["id"])
             job.applications.remove(request.user)
-            job.declined.add(request.user)
+            job.declined.add(request)
         except Exception as e:
             print(e)
     return redirect('/employee/')

@@ -49,7 +49,7 @@ def FarmersRegisterViews(request):
     if request.method == 'POST':
         form = FarmerSignUpForm(request.POST)
         if form.is_valid():
-            if not User.objects.filter(username=form.username).exists():
+            try:
                 if form.is_valid():
                     user = form.save()
                     crop = request.POST['cars']
@@ -57,7 +57,7 @@ def FarmersRegisterViews(request):
                     user.save()
                     message = 'user created'
                     return redirect('/')
-            else:
+            except:
                 message = "username already exists"
 
         else:

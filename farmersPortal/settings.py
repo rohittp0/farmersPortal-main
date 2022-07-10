@@ -183,9 +183,7 @@ JAZZMIN_SETTINGS = {
     "usermenu_links": [
         {"name": "logs", "url": f"/{ADMIN_URL}logs/",
          "icon": "fas fa-comments", },
-        {"name": "requests", "url": f"/{ADMIN_URL}request-viewer/",
-         "icon": "fas fa-comments", },
-        {"model": "auth.user"}
+
     ],
 
     #############
@@ -202,7 +200,7 @@ JAZZMIN_SETTINGS = {
     "hide_apps": [],
 
     # Hide these models when generating side menu (e.g auth.user)
-    "hide_models": [],
+    "hide_models": ["auth.groups"],
 
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
     # "order_with_respect_to": ["auth", "books", "books.author", "books.book"],
