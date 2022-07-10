@@ -34,3 +34,4 @@ class Job(models.Model):
     salary = models.FloatField(default=1000, help_text="per day")
     applications = models.ManyToManyField(User, related_name="applicants")
     hired_list = models.ManyToManyField(User, related_name="hired")
+    declined = models.ManyToManyField(User, related_name="rejected")

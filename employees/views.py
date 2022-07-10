@@ -13,7 +13,8 @@ from farmers.models import HiringRequest, Job
 def index(request):
     anns = Announcements.objects.all()
     # print(anns)
-    reqs = Job.objects.all().exclude(applications__in=[request.user])
+    reqs = Job.objects.all().exclude(applications__in=[request.user]).exclude(hired_list__in=[request.user])\
+        .exclude(declined__in=[request.user])
     return render(request, 'employees/index.html', {"anns": anns, "reqs": reqs})
 
 
@@ -66,6 +67,6 @@ def accepted_job(request):
 
 @login_required()
 def profile(request):
-    anns = Announcements.objects.all()
+    anns = Job.objects.filter(hired_list__in=[request.user])
     # print(anns)
     return render(request, "employees/profile.html", {"anns": anns})

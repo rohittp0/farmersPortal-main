@@ -72,6 +72,8 @@
                     <H2>{{ request.user.first_name }} {{ requst.user.last_name }}</H2>
                     <p>Age: {{ request.user.age }}</p>
                     <p>Aadhar: {{ request.user.aadhar }}</p>
+                    <p>State: {{ request.user.state }}</p>
+                    <p>Salary: {{ request.user.salary }}</p>
 
                 </div>
 
@@ -81,15 +83,13 @@
         <div class="right-box">
             <div class="ann_container">
                 <div class="ann_head" style="padding: 1rem">
-                    Announcements
+                    Job Confirmations
                 </div>
                 {% for an in anns %}
                     <div class="ann_item">
-                        <h3>{{ an.title }}</h3>
+                        <h3>{{ an.name }}</h3>
                         <p>{{ an.description }}</p>
-                        {% if an.link %}
-                            <a href="{{ an.link }}">Click here</a>
-                        {% endif %}
+                        <p>Salary: {{ an.salary }} &nbsp;&nbsp;&nbsp; Days:{{ an.day }}</p>
                     </div>
                 {% endfor %}
             </div>
