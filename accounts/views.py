@@ -7,16 +7,6 @@ from django.contrib.auth import authenticate, logout as auth_logout, login
 # Create your views here.
 
 
-# @login_required
-def index(request):
-    return render(request, 'accounts/new_index.html')
-
-
-@login_required
-def app_api_urls(request):
-    return render(request, 'accounts/api-urls.html')
-
-
 def logout(request):
     auth_logout(request)
     return redirect('/')

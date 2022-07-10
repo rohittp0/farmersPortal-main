@@ -3,10 +3,10 @@ from django.contrib.auth.decorators import login_required
 from accounts.models import User
 from admins.models import Announcements
 from employees.forms import EmployeesSignUpForm
-from employees.models import Hearing
+
 
 # Create your views here.
-from farmers.models import HiringRequest, Job
+from farmers.models import Job
 
 
 @login_required
@@ -37,11 +37,6 @@ def EmployeesRegisterViews(request):
         print("in else")
     connext = {"form": form, "message": message}
     return render(request, "employees/register.html", connext)
-
-
-def HiringRequestList(request):
-    hiring_request_lists = Hearing.objects.filter(email=request.user.email)
-    return render(request, "employees/hiring-request-list.html", {'hiring_request_lists': hiring_request_lists})
 
 
 def rejected_job(request):

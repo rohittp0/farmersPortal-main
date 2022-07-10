@@ -24,11 +24,11 @@ class Weather(models.Model):
     def __str__(self):
         return self.url_of_weather
 
-#
+
 class Homepage(models.Model):
     forum_link = models.CharField(max_length=1000)
     market_rate_link = models.CharField(max_length=1000)
-#
+
 
 class Crop(models.Model):
     crop_name = models.CharField("Name Of crop", max_length=100)
