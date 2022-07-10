@@ -48,6 +48,7 @@
                 <tr>
                     <th>Sl no</th>
                     <th>Job name</th>
+                    <th>Created User</th>
                     <th>Salary</th>
                     <th>Days</th>
                     <th>Total Applications</th>
@@ -64,6 +65,9 @@
 
                         <td>
                             {{ job.name }}
+                        </td>
+                        <td>
+                            {{ job.user.first_name }} {{ job.user.last_name }}
                         </td>
                         <td>
                             {{ job.salary }} Rs
