@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'admins.apps.AdminsConfig',
     'employees.apps.EmployeesConfig',
     'farmers.apps.FarmersConfig',
-    'apis.apps.ApiConfig',
     'rest_framework',
 ]
 

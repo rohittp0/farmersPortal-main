@@ -10,6 +10,5 @@ urlpatterns = [
                   path('', include('accounts.urls')),
                   path('employee/', include('employees.urls')),
                   path('farmers/', include('farmers.urls')),
-                  path('api/', include('apis.urls'))
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
               static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

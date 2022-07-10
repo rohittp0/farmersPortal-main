@@ -9,6 +9,5 @@ def index(request):
                "job_count": Job.objects.all().count(),
                "employees": sum([job.hired_list.count() for job in Job.objects.all()])
 
-
                }
     return render(request, 'admins/index.html', context=context)
