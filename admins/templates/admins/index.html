@@ -53,6 +53,7 @@
                     <th>Days</th>
                     <th>Total Applications</th>
                     <th>Hired Count</th>
+                    <th>Total Expenditure</th>
 
                 </tr>
 
@@ -80,6 +81,9 @@
                         </td>
                         <td>
                             {{ job.hired_count }}
+                        </td>
+                        <td>
+                            {{ job.total_expenditure }}
                         </td>
                     </tr>
                 {% endfor %}

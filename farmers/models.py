@@ -41,8 +41,16 @@ class Job(models.Model):
 
     @property
     def total_count(self):
-        return self.applications.all().count()
+        return self.applications.all().count() + self.hired_count
 
     @property
     def hired_count(self):
         return self.hired_list.all().count()
+
+    @property
+    def total_expenditure(self):
+        return self.salary * self.day * self.hired_count
+
+    @property
+    def application_count(self):
+        return self.applications.all().count() + s
