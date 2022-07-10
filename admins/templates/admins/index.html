@@ -88,10 +88,11 @@
         </div>
     </div>
     <script>
-    function print() {
-        const printer = window.open("", "_blank");
+        function print() {
+            const printer = window.open("", "_blank");
 
-        printer.document.write(document.getElementById("printable").innerHTML);
-        printer.print();
-    }
+            printer.document.write(document.getElementById("printable").innerHTML);
+            printer.print();
+        }
+    </script>
 {% endblock content %}
