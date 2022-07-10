@@ -13,7 +13,7 @@ from farmers.models import HiringRequest, Job
 def index(request):
     anns = Announcements.objects.all()
     # print(anns)
-    reqs = Job.objects.all().exclude(applications__in=[request.user]).exclude(hired_list__in=[request.user])\
+    reqs = Job.objects.all().exclude(applications__in=[request.user]).exclude(hired_list__in=[request.user]) \
         .exclude(declined__in=[request.user])
     return render(request, 'employees/index.html', {"anns": anns, "reqs": reqs})
 
@@ -24,9 +24,11 @@ def EmployeesRegisterViews(request):
     if request.method == 'POST':
         form = EmployeesSignUpForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            message = 'user created'
-            return redirect('/')
+            if not User.objects.filter(username=form.username).exists():
+                user = form.save()
+                message = 'user created'
+                return redirect('/')
+            message = "username already exists"
         else:
             message = 'form is not valid'
     else:
@@ -47,8 +49,8 @@ def rejected_job(request):
         try:
 
             job = Job.objects.get(pk=request.POST["id"])
-
             job.applications.remove(request.user)
+            job.declined.add(request.user)
         except Exception as e:
             print(e)
     return redirect('/employee/')
